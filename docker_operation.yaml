@@ -1,0 +1,45 @@
+# install docker and module dependacies (done)
+# download image docker (done)
+# deploy container from existing image (done)
+# list active container 
+# delete container
+# deadline tgl 18 - 03 - 2020
+---
+- name: docker installation and management 
+  hosts: local
+  become: true
+  vars_files:
+    - default_var.yaml
+  tasks:
+    - name: check connection
+      ping:
+    - name: update centos
+      yum:
+        name: '*'
+        state: latest
+    - name: install pip requirements
+      yum:
+        name: epel-release
+        state: latest
+    - name: install pip
+      yum:
+        name: python-pip
+        state: latest
+    - name: install docker module 
+      pip:
+        name: docker
+    - name: install docker
+      yum:
+        name: docker
+        state: latest
+    - name: download docker image
+      docker_image:
+        name: '{{ container_image }}'
+        source: pull
+    - name: Create a container
+      docker_container:
+        name: web
+        state: started
+        image: nginx
+        published_ports: 8080:80 
+        command: ls
