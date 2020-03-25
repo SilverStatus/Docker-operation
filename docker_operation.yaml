@@ -1,11 +1,11 @@
 # install docker and module dependacies (done)
 # download image docker (done)
 # deploy container from existing image (done)
-# list active container 
-# delete container
-# deadline tgl 18 - 03 - 2020
+# list active container (done still list one active container)
+# delete container (done)
+
 ---
-- name: docker installation and management 
+- name: docker installation and management
   hosts: local
   become: true
   vars_files:
@@ -25,7 +25,7 @@
       yum:
         name: python-pip
         state: latest
-    - name: install docker module 
+    - name: install docker module
       pip:
         name: docker
     - name: install docker
@@ -41,5 +41,22 @@
         name: web
         state: started
         image: nginx
-        published_ports: 8080:80 
-        command: ls
+        published_ports: 80:80
+    # module for inspect docker container
+    - name: get info from my container
+      docker_container_info:
+        name: '{{ container }}'
+      register: hasil # input result to variable hasil
+    - name: Does container exist?
+      debug:
+        msg: "The container {{ 'exists' if hasil.exists else 'does not exist' }}"
+    - name: show list of running container
+      debug:
+        var: hasil.container
+      when: hasil.exists
+      # delete docker container
+    - name: delete container
+      docker_container:
+        name: '{{ delete_container }}'
+        state: absent
+        
