@@ -1,9 +1,8 @@
 # Docker-operation
 Operate docker using ansible
 
-docker_operation.yaml file contains script to install & manage docker on centos 7. == main script 
-default_var.yaml file contains variable used for main script == variable file
-
+--> docker_operation.yaml file contains script to install & manage docker on centos 7. == main script.                                    
+--> default_var.yaml file contains variable used for main script == variable file.
 
 How to use this script:
 - download all file (docker_operation.yaml & default_var.yaml)
