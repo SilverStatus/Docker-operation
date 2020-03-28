@@ -38,7 +38,7 @@
         source: pull
     - name: Create a container
       docker_container:
-        name: web
+        name: '{{ container_name }}'
         state: started
         image: nginx
         published_ports: 80:80
