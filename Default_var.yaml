@@ -1,5 +1,4 @@
 ---
-number_of_containers: 1
 container_name: docker_container
 container_image: nginx
 default_container_command: sleep 1d
