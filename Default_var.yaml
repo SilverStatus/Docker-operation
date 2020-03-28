@@ -1,6 +1,6 @@
 ---
-container_name: docker_container
+container_name: web
 container_image: nginx
-default_container_command: sleep 1d
-delete_container: test
 container: web
+delete_container: test
+
